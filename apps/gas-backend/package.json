@@ -1,0 +1,33 @@
+{
+  "name": "gas-backend",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "clean": "rimraf .turbo dist",
+    "nukedist": "rimraf dist",
+    "lint": "tsc --noEmit",
+    "prep:dev": "node prep_dev.mjs",
+    "build:dev": "NODE_ENV=development rollup --config --watch --watch.buildDelay 2000",
+    "build:staging": "tsc && NODE_ENV=staging rollup --config",
+    "build:production": "tsc && NODE_ENV=production rollup --config"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.23.0",
+    "@babel/plugin-transform-runtime": "^7.22.15",
+    "@babel/preset-env": "^7.22.20",
+    "@babel/preset-typescript": "^7.23.0",
+    "@rollup/plugin-babel": "^6.0.3",
+    "@rollup/plugin-commonjs": "^23.0.7",
+    "@rollup/plugin-json": "^5.0.2",
+    "@rollup/plugin-node-resolve": "^15.2.1",
+    "@types/google-apps-script": "^1.0.72",
+    "@types/node": "^20.8.2",
+    "dotenv": "^16.3.1",
+    "rimraf": "^5.0.5",
+    "rollup": "^2.79.1",
+    "rollup-plugin-copy": "^3.5.0",
+    "rollup-plugin-delete": "^2.0.0",
+    "rollup-plugin-dotenv": "^0.4.1",
+    "typescript": "^4.9.5"
+  }
+}
