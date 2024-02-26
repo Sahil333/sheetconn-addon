@@ -30,7 +30,7 @@ export function ui_openSidebar() {
   try {
     // prepare the html output.
     // 'index' refers to apps/gas-frontend/index.html
-    let htmlTemplate = HtmlService.createTemplateFromFile("sidebar-1");
+    let htmlTemplate = HtmlService.createTemplateFromFile("sidebar");
 
     // pass data from gas-backend to gas-frontend
     htmlTemplate.data = {
@@ -39,7 +39,7 @@ export function ui_openSidebar() {
     SpreadsheetApp.getUi().showSidebar(
       htmlTemplate
         .evaluate()
-        .setTitle(`My Addon (v` + process.env.PUBLIC_PACKAGE_VERSION + `)`)
+        .setTitle(`SheetConn`)
     );
   } catch (e) {
     if (e instanceof Error) {

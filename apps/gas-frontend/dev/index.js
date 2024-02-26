@@ -25,6 +25,7 @@ const validateMessageOrigin = (eventOrigin) => {
   // child iframe must have one of the following urls
   // https://localhost:PORT or https://127.0.0.1:PORT
   // console.log(`[devserver(${FILENAME})] eventOrigin:`, eventOrigin);
+  window.console.log(`[devserver(${FILENAME})] eventOrigin:`, eventOrigin);
   return (
     eventOrigin === `https://localhost:${PORT}` ||
     eventOrigin === `https://127.0.0.1:${PORT}`
@@ -32,8 +33,6 @@ const validateMessageOrigin = (eventOrigin) => {
 };
 
 let iframeElement = document.createElement("iframe");
-iframeElement.allow =
-  "accelerometer *; ambient-light-sensor *; autoplay *; camera *; clipboard-read *; clipboard-write *; encrypted-media *; fullscreen *; geolocation *; gyroscope *; magnetometer *; microphone *; midi *; payment *; picture-in-picture *; screen-wake-lock *; speaker *; sync-xhr *; usb *; web-share *; vibrate *; vr *";
 iframeElement.id = "devIFrame";
 iframeElement.setAttribute("src", `https://localhost:${PORT}/${FILENAME}`);
 iframeElement.style.position = "fixed";
@@ -59,6 +58,7 @@ window.addEventListener(
 
     // check if the message is sent from legitimate source or not.
     // accept messages only from child iframe that has known url.
+    window.console.log(`[devserver(${FILENAME})] event`, JSON.stringify(event));
     if (!validateMessageOrigin(eventOrigin)) return;
 
     // get the message payload
@@ -91,9 +91,9 @@ window.addEventListener(
               // console.log("dev/template.js", response);
               // we got the response from google.script.run(),
               // send the response to the child iframe
-              // console.log(
-              //   `[devserver(${FILENAME})] sending SUCCESS response to child iframe (${eventOrigin})`
-              // );
+              console.log(
+                `[devserver(${FILENAME})] sending SUCCESS response to child iframe (${eventOrigin})`, JSON.stringify(response)
+              );
               iframeElement.contentWindow.postMessage(
                 { type: "RESPONSE", id, status: "SUCCESS", response },
                 eventOrigin
@@ -102,9 +102,9 @@ window.addEventListener(
             .catch((err) => {
               // in case google.script.run() returns error (withFailureHandler),
               // send the error response to child iframe
-              // console.log(
-              //   `[devserver(${FILENAME})] sending ERROR response to child iframe (${eventOrigin})`
-              // );
+              console.log(
+                `[devserver(${FILENAME})] sending ERROR response to child iframe (${eventOrigin})`, err
+              );
               iframeElement.contentWindow.postMessage(
                 {
                   type: "RESPONSE",
@@ -117,15 +117,18 @@ window.addEventListener(
             });
         } else {
           // throw function not found error message
+          console.log(
+            `is nto a function`
+          );
           throw new TypeError(
             `google.script.run.withSuccessHandler(...).withFailureHandler(...).${functionName} is not a function`
           );
         }
       } catch (err) {
         // send error to child iframe
-        // console.log(
-        //   `[devserver(${FILENAME})] sending ERROR response to child iframe (${eventOrigin})`
-        // );
+        console.log(
+          `[devserver(${FILENAME})] sending ERROR response to child iframe 2 (${eventOrigin})`, err
+        );
         iframeElement.contentWindow.postMessage(
           {
             type: "RESPONSE",

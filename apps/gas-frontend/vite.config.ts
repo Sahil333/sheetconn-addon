@@ -8,7 +8,7 @@ import tsconfigPaths from "vite-tsconfig-paths";
 
 // List the html files
 const htmlFiles = {
-  sidebar1: resolve(__dirname, "sidebar-1.html"),
+  sidebar1: resolve(__dirname, "sidebar.html"),
   // modal1: resolve(__dirname, "modal-1.html"),
   // sidebar2: resolve(__dirname, "sidebar-2.html"),
   // modal2: resolve(__dirname, "modal-2.html"),
@@ -77,7 +77,7 @@ export default defineConfig(({ command, mode }) => {
         viteStaticCopy({
           targets: [
             {
-              src: "dist/*.html",
+              src: "dist/**/*.html",
               dest: resolve(__dirname, "../gas-root/dist"),
             },
           ],

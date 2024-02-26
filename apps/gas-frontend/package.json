@@ -1,4 +1,4 @@
-{
+    {
   "name": "gas-frontend",
   "version": "1.0.0",
   "description": "",
@@ -12,7 +12,12 @@
     "serve": "vite"
   },
   "dependencies": {
-    "gas-client-fork": "^0.1.0",
+    "@emotion/react": "^11.11.3",
+    "@emotion/styled": "^11.11.0",
+    "@mui/icons-material": "^5.15.10",
+    "@mui/joy": "5.0.0-beta.28",
+    "@mui/material": "^5.15.10",
+    "gas-client": "1.1.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.22.1"
@@ -27,6 +32,7 @@
     "vite-plugin-mkcert": "^1.16.0",
     "vite-plugin-singlefile": "^0.13.5",
     "vite-plugin-static-copy": "^0.17.0",
-    "vite-tsconfig-paths": "^4.2.1"
+    "vite-tsconfig-paths": "^4.2.1",
+    "gas-client-fork": "0.1.0"
   }
 }
